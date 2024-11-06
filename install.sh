@@ -7,12 +7,11 @@ check_error() {
         exit 1
     fi
 }
-
+sudo su
 echo "Step 1: Updating the system"
 echo "This will update your system packages and install nano (a text editor)."
 echo "Please wait..."
-sudo apt update && sudo apt upgrade -y && sudo apt install nano -y
-check_error
+apt update -y && sudo apt upgrade -y
 echo "System update complete."
 
 echo ""
