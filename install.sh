@@ -16,8 +16,7 @@ read -p "Do you want to update and upgrade the system first? (y/n): " update_upg
 if [[ "$update_upgrade" == "y" || "$update_upgrade" == "Y" ]]; then
     sudo apt update && sudo apt upgrade -y
     echo "System updated and upgraded."
-fi
-
+    
 # Prompt for hostname change
 read -p "Do you want to change the hostname? (y/n): " change_hostname
 
@@ -43,7 +42,6 @@ if [[ "$enable_root_login" == "y" || "$enable_root_login" == "Y" ]]; then
     echo "Root login enabled. Please restart the system to apply changes."
 else
     echo "Root login not enabled."
-fi
 
 # Prompt for swap file creation
 read -p "Do you want to create a swap file? (y/n): " create_swap
