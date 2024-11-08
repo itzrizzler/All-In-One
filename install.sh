@@ -58,8 +58,6 @@ if [[ "$create_swap" == "y" || "$create_swap" == "Y" ]]; then
     sudo bash -c "echo 'vm.vfs_cache_pressure=50' >> /etc/sysctl.conf"
 
     echo "Swap file created and system configuration updated."
-else
-    echo "Swap file creation skipped."
 fi
 
 # Prompt for system update and upgrade
