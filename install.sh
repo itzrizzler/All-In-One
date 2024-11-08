@@ -10,47 +10,6 @@ fi
 echo "Please ensure you are running this script as root."
 echo "This script is created by Rizzler and sponsored by RizzlerCloud."
 
-# Prompt for system update and upgrade
-read -p "Do you want to update and upgrade the system? (y/n): " update_upgrade
-
-if [[ "$update_upgrade" == "y" || "$update_upgrade" == "Y" ]]; then
-    echo "Updating and upgrading system..."
-    sudo apt update && sudo apt upgrade -y
-    if [ $? -ne 0 ]; then
-        echo "Error updating and upgrading system. Please check logs for details."
-    else
-        echo "System updated and upgraded successfully."
-    fi
-fi
-
-# Prompt for hostname change
-read -p "Do you want to change the hostname? (y/n): " change_hostname
-
-if [[ "$change_hostname" == "y" || "$change_hostname" == "Y" ]]; then
-    read -p "Enter the new hostname: " new_hostname
-    sudo hostnamectl set-hostname $new_hostname
-    echo "Hostname changed to $new_hostname."
-fi
-
-# Prompt for enabling root login
-read -p "Do you want to enable root login? (y/n): " enable_root_login
-
-if [[ "$enable_root_login" == "y" || "$enable_root_login" == "Y" ]]; then
-    # Edit authorized_keys file
-    sed -i '/no-port-forwarding/d' /root/.ssh/authorized_keys
-
-    # Edit SSH configuration
-    sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/g' /etc/ssh/sshd_config
-    sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
-
-    # Restart SSH service
-    systemctl restart sshd
-
-    echo "Root login enabled. Please restart the system to apply changes."
-else
-    echo "Root login not enabled."
-fi
-
 # Prompt for swap file creation
 read -p "Do you want to create a swap file? (y/n): " create_swap
 
@@ -101,4 +60,40 @@ if [[ "$create_swap" == "y" || "$create_swap" == "Y" ]]; then
     echo "Swap file created and system configuration updated."
 else
     echo "Swap file creation skipped."
+fi
+
+# Prompt for system update and upgrade
+read -p "Do you want to update and upgrade the system? (y/n): " update_upgrade
+
+if [[ "$update_upgrade" == "y" || "$update_upgrade" == "Y" ]]; then
+    sudo apt update && sudo apt upgrade -y
+    echo "System updated and upgraded."
+fi
+
+# Prompt for hostname change
+read -p "Do you want to change the hostname? (y/n): " change_hostname
+
+if [[ "$change_hostname" == "y" || "$change_hostname" == "Y" ]]; then
+    read -p "Enter the new hostname: " new_hostname
+    hostnamectl set-hostname $new_hostname
+    echo "Hostname changed to $new_hostname."
+fi
+
+# Prompt for enabling root login
+read -p "Do you want to enable root login? (y/n): " enable_root_login
+
+if [[ "$enable_root_login" == "y" || "$enable_root_login" == "Y" ]]; then
+    # Edit authorized_keys file
+    sed -i '/no-port-forwarding/d' /root/.ssh/authorized_keys
+
+    # Edit SSH configuration
+    sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/g' /etc/ssh/sshd_config
+    sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
+
+    # Restart SSH service
+    systemctl restart sshd
+
+    echo "Root login enabled. Please restart the system to apply changes."
+else
+    echo "Root login not enabled."
 fi
