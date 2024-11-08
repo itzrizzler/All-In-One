@@ -66,8 +66,13 @@ fi
 read -p "Do you want to update and upgrade the system? (y/n): " update_upgrade
 
 if [[ "$update_upgrade" == "y" || "$update_upgrade" == "Y" ]]; then
+    echo "Updating and upgrading system..."
     sudo apt update && sudo apt upgrade -y
-    echo "System updated and upgraded."
+    if [ $? -ne 0 ]; then
+        echo "Error updating and upgrading system. Please check logs for details."
+    else
+        echo "System updated and upgraded successfully."
+    fi
 fi
 
 # Prompt for hostname change
@@ -75,7 +80,7 @@ read -p "Do you want to change the hostname? (y/n): " change_hostname
 
 if [[ "$change_hostname" == "y" || "$change_hostname" == "Y" ]]; then
     read -p "Enter the new hostname: " new_hostname
-    hostnamectl set-hostname $new_hostname
+    sudo hostnamectl set-hostname $new_hostname
     echo "Hostname changed to $new_hostname."
 fi
 
