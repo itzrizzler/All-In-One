@@ -8,7 +8,7 @@ fi
 
 # Display a welcome message
 echo "Welcome to the System Configuration Script."
-echo "Created by Rizzler and sponsored by RizzlerCloud."
+echo "Created by Rizzler"
 
 # Prompt for swap file creation
 read -p "Do you want to create a swap file? (y/n): " create_swap
