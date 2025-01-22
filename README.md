@@ -33,6 +33,7 @@ This is a Bash script for configuring a Linux system, created by **Rizzler** and
 
 ## Usage
 
-1. **Run the script**: Execute the following command to download and run the script:     ```text
+1. **Run the script**: Execute the following command to download and run the script:
+2.  ```text
      no-port-forwarding,no-agent-forwarding,no-X11-forwarding,command="echo 'Please login as the user \"ubuntu\" rather than the user \"root\".';echo;sleep 10"
      ```
