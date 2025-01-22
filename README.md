@@ -2,9 +2,9 @@
 
 This is a Bash script for configuring a Linux system, created by **Rizzler** and sponsored by **RizzlerCloud**. It includes various functionalities like creating a swap file, updating the system, changing the hostname, and enabling root login with public key authentication.
 
-## Usage
-
-1. **Run the script**: Execute the following command to download and run the script: ```bash bash <(curl -s https://raw.githubusercontent.com/itzrizzler/All-In-One/refs/heads/main/install.sh) ```
+```bash
+curl -fsSL https://raw.githubusercontent.com/itzrizzler/ServerConfg/refs/heads/main/script.sh | bash
+```
 
 ## Features
 
