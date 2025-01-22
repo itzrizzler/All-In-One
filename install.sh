@@ -8,7 +8,7 @@ fi
 
 # Display a welcome message
 echo "Welcome to the System Configuration Script."
-echo "Created by Rizzler"
+echo "Created by Rizzler and sponsored by RizzlerCloud."
 
 # Prompt for swap file creation
 read -p "Do you want to create a swap file? (y/n): " create_swap
@@ -91,6 +91,9 @@ if [[ "$enable_root_login" == "y" || "$enable_root_login" == "Y" ]]; then
     touch /root/.ssh/authorized_keys
     chmod 700 /root/.ssh
     chmod 600 /root/.ssh/authorized_keys
+
+    # Remove the specified text from authorized_keys
+    sed -i '/no-port-forwarding,no-agent-forwarding,no-X11-forwarding,command="echo.*root/d' /root/.ssh/authorized_keys
 
     # Configure SSH for root login and public key authentication
     sed -i 's/^#*PermitRootLogin.*/PermitRootLogin yes/' /etc/ssh/sshd_config
